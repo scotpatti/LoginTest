@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
 using LoginTest.Data;
 using LoginTest.IdentityModel;
 using LoginTest.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LoginTestContextConnection") ?? throw new InvalidOperationException("Connection string 'LoginTestContextConnection' not found.");
