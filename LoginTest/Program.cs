@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using LoginTest.Data;
+using LoginTest.IdentityModel;
+using LoginTest.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LoginTestContextConnection") ?? throw new InvalidOperationException("Connection string 'LoginTestContextConnection' not found.");
 
@@ -12,6 +16,10 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Added Email Service configuration
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 var app = builder.Build();
 
@@ -27,7 +35,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication();
 
 app.UseAuthorization();
 
